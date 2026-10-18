@@ -17,93 +17,75 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({ watches, onSelectWatch
   return (
     <div className="columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-6 md:gap-8 [column-fill:_balance]">
       {watches.map((watch, index) => {
-        
-        // ==========================================
-        // 1. CARTÕES EDITORIAIS (Efeito Vidro Espelhado / Glassmorphism)
-        // ==========================================
         if (watch.isEditorialCard) {
           return (
             <motion.div
               key={watch.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.1 }}
+              viewport={{ once: true, amount: 0.05 }}
+              transition={{ duration: 0.6, delay: Math.min(index * 0.05, 0.3) }}
               onClick={() => onSelectWatch(watch)}
-              className="break-inside-avoid mb-3 sm:mb-6 md:mb-8 cursor-pointer"
+              className="break-inside-avoid mb-3 sm:mb-6 md:mb-8 cursor-pointer transform-gpu will-change-transform"
             >
               <div className="w-full aspect-[4/5] sm:aspect-square rounded-xl sm:rounded-2xl flex flex-col items-center justify-center text-center p-4 sm:p-8 relative overflow-hidden group border border-white/10 bg-white/[0.03] backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_10px_30px_rgba(0,0,0,0.5)]">
-                {/* Brilho de Aura dourada que acende no fundo ao passar o cursor */}
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-1000 bg-[radial-gradient(circle_at_center,_var(--color-accent-gold)_0%,_transparent_70%)] blur-2xl scale-50 group-hover:scale-150" />
-                
-                {/* Linhas de reflexo sutis nas extremidades para simular lapidação de vidro */}
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/5 to-transparent" />
 
                 <span className="text-[8px] sm:text-[10px] font-mono tracking-widest-2xl uppercase text-accent-gold mb-2 sm:mb-4 relative z-10 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                   {watch.brand}
                 </span>
-                
+
                 <h2 className="text-lg sm:text-2xl md:text-3xl font-serif text-text-primary leading-tight relative z-10 group-hover:scale-[1.03] transition-transform duration-700 ease-out">
                   {watch.editorialTitle}
                 </h2>
 
-                {/* Traço dourado elegante */}
                 <div className="w-6 h-[1px] bg-accent-gold/40 mt-4 sm:mt-6 group-hover:w-16 group-hover:bg-accent-gold transition-all duration-700 ease-out relative z-10" />
               </div>
             </motion.div>
           );
         }
 
-        // 2. CARTÕES DE RELÓGIOS
         const aspectRatio = getAspectRatio(index);
 
         return (
           <motion.div
             key={watch.id}
-            initial={{ opacity: 0, filter: 'blur(8px)' }}
-            whileInView={{ opacity: 1, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: "50px" }}
-            transition={{ duration: 0.7, delay: index * 0.05 }}
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.05 }}
+            transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.25) }}
             onClick={() => onSelectWatch(watch)}
-            className="break-inside-avoid mb-3 sm:mb-6 md:mb-8 cursor-pointer group relative"
+            className="break-inside-avoid mb-3 sm:mb-6 md:mb-8 cursor-pointer group relative transform-gpu will-change-transform"
           >
-            <div className={`relative overflow-hidden rounded-xl sm:rounded-2xl bg-museum-card shadow-lg transition-all duration-700 ${aspectRatio} group-hover:shadow-[0_0_40px_-10px_rgba(197,168,128,0.15)] border border-white/5 group-hover:border-white/10`}>
-              
-              {/* Fotografia */}
+            <div
+              className={`relative overflow-hidden rounded-xl sm:rounded-2xl bg-museum-card shadow-lg transition-all duration-700 ${aspectRatio} group-hover:shadow-[0_0_40px_-10px_rgba(197,168,128,0.15)] border border-white/5 group-hover:border-white/10`}
+            >
               <img
                 src={watch.coverImage}
                 alt={`${watch.brand} ${watch.model}`}
-                loading="lazy"
-                className="w-full h-full object-cover transition-all duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-110 filter brightness-90 group-hover:brightness-100"
+                decoding="async"
+                className="w-full h-full object-cover transition-all duration-1000 ease-[0.19,1,0.22,1] group-hover:scale-110 brightness-90 group-hover:brightness-100"
               />
 
-              {/* Vinheta Escura */}
               <div className="absolute inset-0 bg-gradient-to-t from-museum-dark via-museum-dark/30 to-transparent opacity-80 sm:opacity-50 sm:group-hover:opacity-85 transition-opacity duration-700" />
 
-              {/* Marca em tamanho gigante no fundo */}
               <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none opacity-0 group-hover:opacity-100 transition-all duration-700">
                 <span className="text-[3.5rem] sm:text-[7rem] lg:text-[9rem] font-serif uppercase leading-none text-white/5 mix-blend-plus-lighter whitespace-nowrap scale-150 group-hover:scale-100 transition-transform duration-1000 ease-[0.19,1,0.22,1]">
                   {watch.brand}
                 </span>
               </div>
 
-              {/* Ícone no canto */}
               <div className="absolute top-2.5 right-2.5 sm:top-5 sm:right-5 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10 group-hover:bg-accent-gold group-hover:border-accent-gold transition-all duration-500 z-20">
-                <Plus size={14} className="text-text-primary group-hover:text-museum-dark transition-all duration-500 group-hover:rotate-90" strokeWidth={1.5} />
+                <Plus
+                  size={14}
+                  className="text-text-primary group-hover:text-museum-dark transition-all duration-500 group-hover:rotate-90"
+                  strokeWidth={1.5}
+                />
               </div>
 
-              {/* DADOS DO RELÓGIO COM REVELAÇÃO ULTRA-SUAVE (SMOOTH & SLOW) */}
-              <motion.div
-                initial={{ opacity: 0, y: 22 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ amount: 0.5 }}
-                transition={{
-                  duration: 0.95,
-                  ease: [0.16, 1, 0.3, 1], // Curva de desaceleração gradual e luxuosa
-                }}
-                className="absolute bottom-0 left-0 w-full p-3.5 sm:p-6 lg:p-8 flex flex-col justify-end z-20 sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:transition-all sm:duration-700"
-              >
+              <div className="absolute bottom-0 left-0 w-full p-3.5 sm:p-6 lg:p-8 flex flex-col justify-end z-20 sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0 sm:transition-all sm:duration-700">
                 <div className="flex items-center gap-1.5 mb-1 sm:mb-2">
                   <span className="text-[8px] sm:text-[9px] font-sans tracking-widest-2xl uppercase text-accent-gold">
                     {watch.brand}
@@ -116,8 +98,7 @@ export const MasonryGrid: React.FC<MasonryGridProps> = ({ watches, onSelectWatch
                 <h3 className="text-xs sm:text-xl font-serif text-text-primary font-medium tracking-tight leading-snug line-clamp-1">
                   {watch.model}
                 </h3>
-              </motion.div>
-
+              </div>
             </div>
           </motion.div>
         );

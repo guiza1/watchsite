@@ -1,6 +1,9 @@
-import '@fontsource/bodoni-moda';
-import '@fontsource/plus-jakarta-sans';
-import '@fontsource/jetbrains-mono';
+// Importa apenas os pesos realmente utilizados pelo layout
+import '@fontsource/bodoni-moda/400.css';
+import '@fontsource/bodoni-moda/600.css';
+import '@fontsource/plus-jakarta-sans/400.css';
+import '@fontsource/plus-jakarta-sans/500.css';
+import '@fontsource/jetbrains-mono/400.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
