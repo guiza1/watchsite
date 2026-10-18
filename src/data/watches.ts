@@ -122,7 +122,7 @@ export const WATCHES_CATALOG: Watch[] = [
     model: 'Speedmaster Professional',
     nickname: 'Moonwatch Chronograph',
     era: 'Anos 60',
-    coverImage: 'https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=900&q=85',
+    coverImage: 'https://www.omegawatches.com/media/catalog/product/o/m/omega-vintage-speedmaster-reduced-DA1750032-138808.jpg?w=1024',
     summary: 'O cronógrafo oficial das missões espaciais Gemini e Apollo.',
     history: [
       'Testado contra variações térmicas extremas e vácuo orbital, tornou-se o único instrumento mecânico homologado pela agência espacial norte-americana para passeios extraveiculares na Lua.'
