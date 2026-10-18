@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-museum-dark: #0A0A0B;
+  --color-museum-card: #141415;
+  --color-museum-border: #232325;
+  
+  --color-text-primary: #F4F2EC;
+  --color-text-muted: #8A8882;
+
+  --color-accent-gold: #C5A880;
+  --color-accent-radium: #D1E189;
+
+  --tracking-widest-xl: 0.25em;
+  --tracking-widest-2xl: 0.35em;
+}
+
+.font-serif {
+  font-family: 'Bodoni Moda', serif !important;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    color: var(--color-text-primary);
+    background-color: #0A0A0B;
+    background-image: 
+      linear-gradient(to bottom, rgba(10, 10, 11, 0.72), rgba(10, 10, 11, 0.88)), 
+      url('/bg-texture.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
